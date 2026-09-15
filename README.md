@@ -107,6 +107,14 @@ Agent 会检查宿主调度能力、运行时的浏览器/账号访问及持久�
 
 入口在 [SKILL.md](SKILL.md)，平台流程在 `references/`，Codex 展示信息在 `agents/openai.yaml`。修改后检查所有相对引用可解析，并分别验证有网络、仅本地材料、缺少转写三种情形的完成状态；不要用格式检查代替真实平台测试。
 
+## 参考与致谢
+
+本技能基于 `workbench-research` 的调研流程改写，将输出改为独立的本地文档归档，并补充了通用环境准备、首次使用引导和定时调研流程。
+
+感谢 **Leo / runesleo** 的开源项目 [bookmark-digest](https://github.com/runesleo/bookmark-digest)（MIT License）。原 Workbench 的 X 收藏流程曾接入该项目，记录的上游版本为 [8cba34b](https://github.com/runesleo/bookmark-digest/tree/8cba34b1cb1354924403425598f99ecc30219c33)，构成本技能 X 收藏流程的历史参考来源。
+
+当前 `local-research` 指令包不包含 `bookmark-digest` 的源码，也不依赖它运行；上述致谢说明来源关系，不代表上游作者参与或认可本项目。
+
 ## 许可证
 
 本指令包采用 [MIT License](LICENSE)。外部平台材料、研究对象与用户归档不因本许可证而改变其原有权利归属。
