@@ -1,0 +1,4 @@
+interface:
+  display_name: "本地情报调研"
+  short_description: "调研 GitHub、抖音与 X，保存本地文档并按主题文件夹归类"
+  default_prompt: "使用 $local-research 调研这些资料，将结果保存为本地 Markdown 文档，按主题与来源分文件夹归档并更新索引。"
