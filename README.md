@@ -30,6 +30,16 @@
 
 对于本地 Codex，可将文件夹放在用户技能目录（默认 `~/.codex/skills/local-research/`；自定义了 `CODEX_HOME` 时为其下的 `skills/local-research/`）。已有同名技能时先保留备份。随后在新会话中检查技能是否出现。其他 Agent 请按其技能加载方式导入整个文件夹；只支持提示词的工具可读取 `SKILL.md`，但也要能访问 `references/`。
 
+## 推荐安装与接入
+
+| 渠道 | 推荐方案 |
+| --- | --- |
+| X | 安装 `runesleo/bookmark-digest` 固定版本，连接专用 Chrome CDP 会话；macOS/Linux 支持，原生 Windows Python 暂不支持 |
+| 抖音 | 浏览器读取收藏清单，再运行本包自带的 `scripts/sync_favorites.py` 下载；需要转写时安装 FFmpeg + WhisperX |
+| GitHub | 安装并登录 GitHub CLI `gh`，读取本人 Star |
+
+具体安装命令、浏览器配置、清单格式、恢复方式和运行限制见 [推荐采集方案](references/collectors.md)。X CDP 是有平台规则风险的非 API 浏览器自动化选项；抖音脚本也不代表官方授权接口。推荐安装不等于默认自动安装或保证账号安全，已有可用接入方案可继续使用。
+
 ## 首次使用
 
 ```text
@@ -40,7 +50,7 @@ Agent 先介绍上述功能，再询问要连接 X、抖音还是 GitHub，可�
 
 1. 选择范围：最近若干条、全部已有收藏或仅未来新增。普通整理未给数量时默认每个来源最近 20 条。
 2. 明确本地保存目录，并展示在线访问风险提醒。
-3. 检查选中来源的真实读取能力；缺失时指导 GitHub CLI 安装/登录，或当前宿主支持的浏览器扩展、接口连接与平台登录。
+3. 检查选中来源的真实读取能力；缺失时指导 GitHub CLI 安装/登录，X CDP 采集器与专用浏览器、抖音随包脚本及可选转写依赖；已有可用接口或浏览器连接可复用。
 4. 实际读取收藏列表，核对账号和条目。仅打开浏览器或读到公开网页不算连接通过。
 5. 整理任务从该列表取内容、分析并归档，继续完成批次。只初始化时验证少量元数据，不自动分析旧收藏；可要求“带我跑通一条”。
 
@@ -81,9 +91,9 @@ Research/
 
 ## 运行能力与验证范围
 
-需要能读写本地文件并调用网络/连接工具的 Agent。本包提供执行流程，不捆绑账号、私有下载脚本、浏览器扩展或转写模型。GitHub 提供 gh 的 Star 读取命令；X/抖音按宿主实际支持且符合平台规则的接入方式准备。能否在线读取取决于连接和权限，不能承诺任意环境安装后立即采集。
+需要能读写本地文件并调用网络/连接工具的 Agent。本包包含抖音视频下载及可选本地转写脚本；脚本不读取收藏列表、不含任何 Key，也不捆绑账号、浏览器扩展或模型。X 推荐外部 CDP 采集器，GitHub 使用 gh。实际在线访问取决于账号、连接与平台限制，不能承诺任意环境安装后立即采集。
 
-当前指令与分享包经过格式、引用及场景检查，尚未在新用户机器上验证三平台完整采集。初始化必须把“列表可读”“内容可得”“分析完成”和“后台定时可运行”分别验证。详见 [初始化](references/onboarding.md)、[归档约定](references/archive.md) 和 [增量流程](references/incremental.md)。
+当前指令与分享包经过格式、引用及场景检查；抖音脚本有离线测试覆盖身份匹配、视频选择、下载/转写恢复及限流停止。尚未在新用户机器上验证三平台完整采集，也未用本次新增脚本实测在线下载和真实模型转写。初始化必须把“列表可读”“内容可得”“分析完成”和“后台定时可运行”分别验证。详见 [初始化](references/onboarding.md)、[归档约定](references/archive.md) 和 [增量流程](references/incremental.md)。
 
 ## 参考与致谢
 
@@ -91,8 +101,10 @@ Research/
 
 感谢 **Leo / runesleo** 的开源项目 [bookmark-digest](https://github.com/runesleo/bookmark-digest)（MIT License）。原 Workbench 的 X 收藏流程曾接入该项目，记录的上游版本为 [8cba34b](https://github.com/runesleo/bookmark-digest/tree/8cba34b1cb1354924403425598f99ecc30219c33)，构成本技能 X 收藏流程的历史参考来源。
 
-当前 `local-research` 指令包不包含 `bookmark-digest` 的源码，也不依赖它运行；上述致谢说明来源关系，不代表上游作者参与或认可本项目。
+当前 `local-research` 不内嵌 `bookmark-digest` 源码，将其作为 X 渠道推荐外部依赖；已有其他可用接入方式也可使用。
+
+抖音下载脚本的分享页解析方式参考 [yzfly/douyin-mcp-server](https://github.com/yzfly/douyin-mcp-server)（Copyright 2025 yzfly，Apache-2.0）；本包基于本地维护版本加入可移植配置、恢复和身份校验，保留 [第三方来源与许可说明](THIRD_PARTY_NOTICES.md)。该上游目前已归档，不将安装上游完整 MCP 服务作为下载前提。
 
 ## 许可证
 
-本指令包采用 [MIT License](LICENSE)。外部平台材料、研究对象与用户归档不因本许可证而改变其原有权利归属。
+指令文档与本项目其他未单独标注文件采用 [MIT License](LICENSE)；`scripts/sync_favorites.py` 采用 [Apache-2.0](licenses/Apache-2.0.txt)，详见 [第三方说明](THIRD_PARTY_NOTICES.md)。外部平台材料、研究对象与用户归档不因本许可证而改变其原有权利归属。
