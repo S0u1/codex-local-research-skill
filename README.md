@@ -89,6 +89,23 @@ Research/
 
 每个条目还有 sources.md 记录来源和证据范围，有字幕/转写时按需保留。历史报告不覆盖，跨主题使用索引关联，原平台收藏保持不变。文件、账号状态和收藏内容不属于技能源码，分享包不包含这些运行数据。
 
+## 判断是否采用与回看结果
+
+你问“这条收藏对当前项目有没有用、要不要换工具”时，Skill 会把现有方法也列为选项，对照实际卡点、来源证据与切换代价，给出保留、小范围验证或限定范围采用的结论。你带回真实试用结果时，会回连原判断并更新适用条件；没有实测数据就不会编造提升百分比。普通收藏整理不额外加项目问卷。详见 [采用判断与反馈](references/adoption-and-feedback.md)。
+
+## 开发与打包
+
+仓库根目录的 `SKILL.md` 是唯一入口。分发 ZIP 和解压目录都放在技能扫描目录之外，不在本目录的 `dist/` 里展开另一份 Skill。打包器拒绝重复入口和技能目录内的输出，并校验包内文件逐字节匹配当前真源：
+
+```bash
+python3 scripts/package_skill.py --check
+python3 scripts/package_skill.py --output "$HOME/Documents/Skill-Packages/local-research.zip"
+python3 scripts/package_skill.py --verify "$HOME/Documents/Skill-Packages/local-research.zip"
+python3 -B -m unittest discover -s tests -v
+```
+
+输出已存在时选择新的文件名，不覆盖旧分发物。`--verify` 是只读检查；打包仅写本地 ZIP，不上传。案例验证读 [采用判断与反馈](references/adoption-and-feedback.md) 末尾说明，将案例请求/材料交给独立 Agent 后再按检查项核对，避免把格式校验当成判断质量证明。
+
 ## 运行能力与验证范围
 
 需要能读写本地文件并调用网络/连接工具的 Agent。本包包含抖音视频下载及可选本地转写脚本；脚本不读取收藏列表、不含任何 Key，也不捆绑账号、浏览器扩展或模型。X 推荐外部 CDP 采集器，GitHub 使用 gh。实际在线访问取决于账号、连接与平台限制，不能承诺任意环境安装后立即采集。

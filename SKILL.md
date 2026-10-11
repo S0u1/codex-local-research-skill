@@ -1,6 +1,6 @@
 ---
 name: local-research
-description: 读取用户的 X 书签、抖音收藏和 GitHub Star，分析收藏内容，按主题生成本地 Markdown 文档和索引，支持定时处理新增收藏。用于收藏整理、首次连接、历史收藏处理、增量同步和已有收藏综述；不把主题搜索、推荐流或通用项目研究作为默认任务。
+description: 读取用户的 X 书签、抖音收藏和 GitHub Star，分析收藏内容，按主题生成本地 Markdown 文档和索引，支持定时处理新增收藏。用于收藏整理、首次连接、历史收藏处理、增量同步、已有收藏综述及收藏方法的项目采用判断与真实试用反馈；不把主题搜索、推荐流或通用项目研究作为默认任务。
 ---
 
 # 本地收藏研究
@@ -35,6 +35,7 @@ description: 读取用户的 X 书签、抖音收藏和 GitHub Star，分析收�
 | X 书签列表与正文 | [X 书签](references/x.md) |
 | 去重、恢复与定时新增 | [增量流程](references/incremental.md) |
 | 已归档收藏的跨来源总结 | [收藏综述](references/digests.md) |
+| 收藏里的方法是否值得用于当前项目、回看真实试用结果 | [采用判断与反馈](references/adoption-and-feedback.md) |
 
 ## 归档与完成
 
